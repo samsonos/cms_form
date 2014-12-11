@@ -7,6 +7,8 @@
  */
 namespace samsonos\cms\ui;
 
+use samson\core\Event;
+
 /**
  * Generic UI container class
  * @package samsonos\cms\ui
@@ -38,7 +40,7 @@ class Container
         $this->parent = & $parent;
 
         // Fire event that ui container has been created
-        \samson\core\Event::fire('cms_ui.container_created', array(&$this));
+        Event::fire('cms_ui.container_created', array(&$this));
     }
 
     /**

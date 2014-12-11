@@ -16,10 +16,19 @@ use samson\core\Event;
 class Tab extends Container
 {
     /** @var Form Pointer to parent form */
-    public $form;
+    protected $form;
 
     /** @var Tab Pointer to parent tab */
-    public $tab;
+    protected $tab;
+
+    /** @var string Path to tab view file */
+    protected $view = 'tab/index';
+
+    /** @var string Path to tab view file */
+    protected $tabView = 'tab/tab';
+
+    /** @var string Path to content view file */
+    protected $contentView = 'tab/content';
 
     /**
      * @param Form $form Pointer to parent form container
@@ -40,6 +49,61 @@ class Tab extends Container
         $parent = isset($tab) ? $tab : $form;
 
         parent::__construct($parent);
+    }
+
+    /**
+     * Render tab top part
+     */
+    protected function renderTab()
+    {
+        $html = '';
+
+        // Iterate all child tabs
+        foreach ($this->children as $child) {
+            // Render each child tab tab view
+            $html .= $child->renderTab();
+        }
+
+        // Render tab tab view with child tabs
+        return $this->renderer
+            ->view($this->tabView)
+            ->set('tabs', $html)
+            ->output();
+    }
+
+    /**
+     * Render tab content part
+     */
+    protected function renderContent()
+    {
+        $html = '';
+
+        // Iterate all child tabs
+        foreach ($this->children as $child) {
+            // Render each child tab content view
+            $html .= $child->renderContent();
+        }
+
+        // Render tab content view with child tabs
+        return $this->renderer
+            ->view($this->contentView)
+            ->set('tabs', $html)
+            ->output();
+    }
+
+    /**
+     * Render tab HTML. Method calls all child tabs
+     * rendering.
+     * @return string Tab HTML
+     */
+    public function render()
+    {
+        // Render tab consisting of two parts
+        return $this->renderer
+            ->view($this->view)
+            ->set('tab', $this->renderTab())
+            ->set('content', $this->renderContent())
+            ->output();
     }
 }
 
