@@ -7,6 +7,8 @@
  */
 namespace samsonos\cms\ui;
 
+use samson\core\Event;
+
 /**
  * Class Tab
  * @package samsonos\cms\form
@@ -32,7 +34,7 @@ class Tab extends Container
         $this->tab = & $tab;
 
         // Fire event that tab has been created
-        \samson\core\Event::fire('cms_ui.tab_created', array(&$this));
+        Event::fire('cms_ui.tab_created', array(&$this));
 
         // Define parent container
         $parent = isset($tab) ? $tab : $form;
