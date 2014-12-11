@@ -5,7 +5,7 @@
  * Date: 11.12.2014
  * Time: 19:32
  */
-namespace samsonos\cms\form;
+namespace samsonos\cms\ui;
 
 /**
  * Class Form
@@ -15,4 +15,7 @@ class Form
 {
     /** @var Form Pointer to parent form */
     public $parent;
+
+    /** @var Tab[] Collection of form tabs */
+    public $tabs;
 }

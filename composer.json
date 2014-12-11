@@ -1,7 +1,7 @@
 {
-	"name":"samsonos/cms_form",
-    "description": "SamsonCMS generic form",
-    "keywords": [ "form", "samsoncms"],
+	"name":"samsonos/cms_ui",
+    "description": "SamsonCMS generic user interface",
+    "keywords": [ "ui", "user interface", "samsoncms"],
     "authors":[
         {
             "name":"Vitaly Iegorov",

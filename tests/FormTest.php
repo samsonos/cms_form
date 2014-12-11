@@ -2,7 +2,7 @@
 namespace tests;
 
 use samson\core\Error;
-use samsonos\cms\form\Form;
+use samsonos\cms\ui\Form;
 
 /**
  * Created by Vitaly Iegorov <egorov@samsonos.com>
