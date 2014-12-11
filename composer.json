@@ -1,0 +1,26 @@
+{
+	"name":"samsonos/cms_form",
+    "description": "SamsonCMS generic form",
+    "keywords": [ "form", "samsoncms"],
+    "authors":[
+        {
+            "name":"Vitaly Iegorov",
+            "email":"egorov@samsonos.com"
+        }
+    ],
+    "minimum-stability":"dev",
+	"require":{
+        "samsonos/php_core":"1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+	"license":"Open Software License (OSL) v 3.0",
+	"homepage":"http://samsonos.com/",
+    "autoload" : {
+        "classmap": ["src/"],
+        "psr-0": {
+            "samsonos\\cms\\form": "src/"
+        }
+    }
+}
