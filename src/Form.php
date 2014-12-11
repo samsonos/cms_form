@@ -11,11 +11,13 @@ namespace samsonos\cms\ui;
  * Class Form
  * @package samsonos\cms\form
  */
-class Form
+class Form extends Container
 {
-    /** @var Form Pointer to parent form */
-    public $parent;
+    public function __construct(Form & $parent = null)
+    {
+        // Fire event that form has been created
+        \samson\core\Event::fire('cms_ui.form_created', array(&$this));
 
-    /** @var Tab[] Collection of form tabs */
-    public $tabs;
+        parent::__construct($parent);
+    }
 }
