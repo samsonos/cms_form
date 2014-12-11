@@ -13,5 +13,6 @@ namespace samsonos\cms\form;
  */
 class Form
 {
-    
+    /** @var Form Pointer to parent form */
+    public $parent;
 }

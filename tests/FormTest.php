@@ -1,8 +1,8 @@
 <?php
 namespace tests;
 
-use samson\fs\FileService;
-use samson\fs\LocalFileService;
+use samson\core\Error;
+use samsonos\cms\form\Form;
 
 /**
  * Created by Vitaly Iegorov <egorov@samsonos.com>
@@ -10,16 +10,22 @@ use samson\fs\LocalFileService;
  */
 class FormTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \samsonos\cms\form\Form Pointer to form */
+    /** @var Form Pointer to form */
     public $form;
 
     /** Tests init */
     public function setUp()
     {
         // Get instance using services factory as error will signal other way
-        $this->form = new \samsonos\cms\form\Form();
+        $this->form = new Form();
 
         // Disable default error output
-        \samson\core\Error::$OUTPUT = false;
+        Error::$OUTPUT = false;
+    }
+
+    /** Empty test */
+    public function testCreation()
+    {
+        $this->form->parent = null;
     }
 }
