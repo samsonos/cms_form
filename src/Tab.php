@@ -34,7 +34,10 @@ class Tab extends Container
         // Fire event that tab has been created
         \samson\core\Event::fire('cms_ui.tab_created', array(&$this));
 
-        parent::__construct(($parent = isset($tab) ? $tab : $form));
+        // Define parent container
+        $parent = isset($tab) ? $tab : $form;
+
+        parent::__construct($parent);
     }
 }
 
