@@ -22,8 +22,8 @@ class Tab extends Container
     public $tab;
 
     /**
-     * @param Form $form
-     * @param Tab $tab
+     * @param Form $form Pointer to parent form container
+     * @param Tab $tab Pointer to parent tab container
      */
     public function __construct(Form & $form, Tab & $tab = null)
     {
