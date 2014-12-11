@@ -25,10 +25,16 @@ class Tab extends Container
     protected $view = 'tab/index';
 
     /** @var string Path to tab view file */
-    protected $tabView = 'tab/tab';
+    protected $topView = 'tab/tab';
 
     /** @var string Path to content view file */
     protected $contentView = 'tab/content';
+
+    /** @var string HTML rendered tab top string */
+    protected $outputTop;
+
+    /** @var string HTML rendered tab Content string */
+    protected $outputContent;
 
     /**
      * @param Form $form Pointer to parent form container
@@ -54,21 +60,26 @@ class Tab extends Container
     /**
      * Render tab top part
      */
-    protected function renderTab()
+    protected function renderTop()
     {
         $html = '';
 
         // Iterate all child tabs
         foreach ($this->children as $child) {
             // Render each child tab tab view
-            $html .= $child->renderTab();
+            $html .= $child->renderTop();
         }
 
         // Render tab tab view with child tabs
-        return $this->renderer
-            ->view($this->tabView)
+        $this->outputTop = $this->renderer
+            ->view($this->topView)
             ->set('tabs', $html)
             ->output();
+
+        // Fire event that tab top has been rendering
+        Event::fire('cms_ui.tab_render_top', array(&$this, &$this->outputTop));
+
+        return $this->outputTop;
     }
 
     /**
@@ -85,10 +96,15 @@ class Tab extends Container
         }
 
         // Render tab content view with child tabs
-        return $this->renderer
+        $this->outputContent = $this->renderer
             ->view($this->contentView)
             ->set('tabs', $html)
             ->output();
+
+        // Fire event that tab top has been rendering
+        Event::fire('cms_ui.tab_render_content', array(&$this, &$this->outputContent));
+
+        return $this->outputContent;
     }
 
     /**
@@ -99,11 +115,16 @@ class Tab extends Container
     public function render()
     {
         // Render tab consisting of two parts
-        return $this->renderer
+        $this->output = $this->renderer
             ->view($this->view)
-            ->set('tab', $this->renderTab())
+            ->set('tab', $this->renderTop())
             ->set('content', $this->renderContent())
             ->output();
+
+        // Fire event that tab has been rendering
+        Event::fire('cms_ui.tab_render', array(&$this, &$this->output));
+
+        return $this->output;
     }
 }
 

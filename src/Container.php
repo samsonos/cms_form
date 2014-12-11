@@ -27,6 +27,9 @@ class Container
     /** @var mixed Renderer object */
     protected $renderer;
 
+    /** @var string HTML rendered container string */
+    protected $output;
+
     /**
      * @param Container $parent Add parent container
      * @param mixed $renderer Object for rendering container
