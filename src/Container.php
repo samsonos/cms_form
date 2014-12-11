@@ -20,7 +20,7 @@ class Container
     protected $children = array();
 
     /** @var string Path to container view file */
-    protected $view;
+    protected $view = 'index';
 
     /** @var mixed Renderer object */
     protected $renderer;
@@ -36,9 +36,6 @@ class Container
 
         // Save pointer to parent form
         $this->parent = & $parent;
-
-        // Save pointer to parent tab
-        $this->tab = & $tab;
 
         // Fire event that ui container has been created
         \samson\core\Event::fire('cms_ui.container_created', array(&$this));
@@ -64,7 +61,7 @@ class Container
 
         // Iterate all child containers
         foreach ($this->children as $child) {
-            // Perfrom child container rendering
+            // Perform child container rendering
             $html .= $child->render();
         }
 
