@@ -102,6 +102,6 @@ class UIApplication extends CompressableService
         // Add this form to workspace
         $this->workspace->add($form);
 
-        $this->view('window/index')->content($form);
+        $this->view('window/index')->set('content', $form);
     }
 }
