@@ -52,7 +52,7 @@ class Container implements IViewSettable
     public function __construct(IViewable & $renderer, Container & $parent = null)
     {
         // Define renderer
-        $this->renderer = !isset($renderer) ? m() : $renderer;
+        $this->renderer = & $renderer;
 
         // Save pointer to parent form
         $this->parent = & $parent;
