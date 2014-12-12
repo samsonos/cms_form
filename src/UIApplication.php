@@ -47,14 +47,14 @@ class UIApplication extends CompressableService
         // Create site item
         $siteItem = new MenuItem($menu);
         $siteItem->set('title', 'Go to web-site')
-            ->set('class', 'btnSite')
+            ->set('class', 'btnWebSite')
             ->set('content', '<a href="/"></a>')
         ;
 
         // Create exit item
         $exitItem = new MenuItem($menu);
         $siteItem->set('title', t('Выйти из SamsonCMS', true))
-            ->set('class', 'btnExit')
+            ->set('class', 'btnLogout')
             ->set('content', '<a href="/"></a>')
         ;
 
