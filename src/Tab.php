@@ -8,6 +8,7 @@
 namespace samsonos\cms\ui;
 
 use samson\core\Event;
+use \samson\core\IViewable;
 
 /**
  * Class Tab
@@ -39,9 +40,9 @@ class Tab extends Container
     /**
      * @param Form $form Pointer to parent form container
      * @param Tab $tab Pointer to parent tab container
-     * @param mixed $renderer Renderer object
+     * @param \samson\core\IViewable $renderer Renderer object
      */
-    public function __construct(Form & $form, Tab & $tab = null, & $renderer = null)
+    public function __construct(Form & $form, Tab & $tab = null, IViewable & $renderer = null)
     {
         // Save pointer to parent form
         $this->form = & $form;
@@ -68,7 +69,7 @@ class Tab extends Container
     {
         $html = '';
 
-        // Iterate all child tabs
+        /** @var Tab $child Iterate all child tabs */
         foreach ($this->children as $child) {
             // Render each child tab tab view
             $html .= $child->renderTop();
@@ -93,7 +94,7 @@ class Tab extends Container
     {
         $html = '';
 
-        // Iterate all child tabs
+        /** @var Tab $child Iterate all child tabs */
         foreach ($this->children as $child) {
             // Render each child tab content view
             $html .= $child->renderContent();

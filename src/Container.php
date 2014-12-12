@@ -8,6 +8,7 @@
 namespace samsonos\cms\ui;
 
 use samson\core\Event;
+use samson\core\IViewable;
 
 /**
  * Generic UI container class
@@ -24,7 +25,7 @@ class Container
     /** @var string Path to container view file */
     protected $view = 'index';
 
-    /** @var mixed Renderer object */
+    /** @var IViewable Renderer object */
     protected $renderer;
 
     /** @var string Container title */
@@ -38,9 +39,9 @@ class Container
 
     /**
      * @param Container $parent Add parent container
-     * @param mixed $renderer Object for rendering container
+     * @param IViewable $renderer Object for rendering container
      */
-    public function __construct(& $renderer, Container & $parent = null)
+    public function __construct(IViewable & $renderer, Container & $parent = null)
     {
         // Define renderer
         $this->renderer = !isset($renderer) ? m() : $renderer;

@@ -8,6 +8,7 @@
 namespace samsonos\cms\ui;
 
 use samson\core\Event;
+use samson\core\IViewable;
 
 /**
  * Class Form
@@ -16,10 +17,10 @@ use samson\core\Event;
 class Form extends Container
 {
     /**
-     * @param mixed $renderer Renderer object
+     * @param \samson\core\IViewable $renderer Renderer object
      * @param Container $parent Pointer to parent form container
      */
-    public function __construct(& $renderer, Container & $parent = null)
+    public function __construct(IViewable & $renderer, Container & $parent = null)
     {
         // Fire event that form has been created
         Event::fire('cms_ui.form_created', array(&$this));
