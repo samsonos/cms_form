@@ -35,4 +35,10 @@ class UIApplication extends CompressableService
 
         }
     }
+
+    /** Controllers */
+    public function __container()
+    {
+        $this->view('window/index')->content(new Form($this));
+    }
 }
