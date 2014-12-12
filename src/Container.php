@@ -33,6 +33,9 @@ class Container implements IViewSettable
     /** @var string Container title */
     protected $title;
 
+    /** @var string Container css class */
+    protected $class;
+
     /** @var string Container unique identifier */
     protected $identifier;
 
@@ -57,6 +60,11 @@ class Container implements IViewSettable
         // Generate generic title
         $this->title = get_class($this).$this->identifier;
 
+        // If parent container is specified - add this container to it
+        if (isset($parent)) {
+            $parent->add($this);
+        }
+
         // Fire event that ui container has been created
         Event::fire('cms_ui.container_created', array(&$this));
     }
@@ -65,6 +73,7 @@ class Container implements IViewSettable
      * Set container field value
      * @param string    $field  Field identifier
      * @param mixed     $value  Field value
+     * @return Container Chaining
      */
     public function set($field, $value)
     {
@@ -72,6 +81,8 @@ class Container implements IViewSettable
         if (property_exists($this, $field)) {
             $this->$field = $value;
         }
+
+        return $this;
     }
 
     /**
@@ -102,6 +113,7 @@ class Container implements IViewSettable
         return $this->renderer
             ->view($this->view)
             ->set('title', $this->title)
+            ->set('class', $this->class)
             ->set('identifier', $this->identifier)
             ->set('content_html', $html)
             ->output();

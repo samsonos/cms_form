@@ -37,7 +37,9 @@ class UIApplication extends CompressableService
         // Create main UI menu
         $menu = new Menu($this);
 
-        $menu->add(new MenuItem());
+        // Create home item
+        $homeItem = new MenuItem($menu);
+        $homeItem->set('title', 'Home')->set('class', 'btnHome');
 
         // Fire event that ui menu container has been created
         Event::fire('cms_ui.mainmenu_created', array(&$menu, &$this));

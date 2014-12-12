@@ -20,4 +20,12 @@ class MenuItem extends Container
 
     /** @var int Menu action */
     protected $action;
+
+    /**
+     * @param Menu $parent Pointer to parent menu container
+     */
+    public function __construct(Menu & $parent)
+    {
+        parent::__construct($parent->renderer, $parent);
+    }
 }

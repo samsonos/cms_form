@@ -1,3 +1,6 @@
-<li class="menu__item">
-    <?php iv('content')?>
+<li
+    class="menu__item <?php iv('class')?>"
+    <?php if(isv('title')):?>title="<?php vi('title')?>"<?php endif?>
+>
+    <?php iv('content_html')?>
 </li>
