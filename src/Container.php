@@ -9,12 +9,13 @@ namespace samsonos\cms\ui;
 
 use samson\core\Event;
 use samson\core\IViewable;
+use samson\core\IViewSettable;
 
 /**
  * Generic UI container class
  * @package samsonos\cms\ui
  */
-class Container
+class Container implements IViewSettable
 {
     /** @var Form Pointer to parent container */
     protected $parent;
@@ -82,5 +83,18 @@ class Container
             ->view($this->view)
             ->set('children', $html)
             ->output();
+    }
+
+    /**
+     * Generate collection of view variables, prefixed if needed, that should be passed to
+     * view context.
+     *
+     * @param string $prefix Prefix to be added to all keys in returned data collection
+     * @return array Collection(key => value) of data for view context
+     */
+    public function toView($prefix = '')
+    {
+        // Return view variable collection with rendered form
+        return array($prefix.'html' => $this->render());
     }
 }

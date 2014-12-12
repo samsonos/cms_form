@@ -16,6 +16,9 @@ use samson\core\IViewable;
  */
 class Form extends Container
 {
+    /** @var string Path to container view file */
+    protected $view = 'form/index';
+
     /**
      * @param \samson\core\IViewable $renderer Renderer object
      * @param Container $parent Pointer to parent form container
