@@ -1,9 +1,5 @@
-<div class="tab">
-    <div class="tab__top">
-        <?php iv('top_html')?>
-    </div>
-
-    <div class="tab__content">
+<div class="tabview">
+    <div class="tabview__inner">
         <?php iv('content_html')?>
     </div>
 </div>

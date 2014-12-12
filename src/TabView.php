@@ -17,55 +17,28 @@ use \samson\core\IViewable;
  */
 class TabView extends Container
 {
-    /** @var Form Pointer to parent form */
-    protected $form;
-
-    /** @var TabView Pointer to parent tab */
-    protected $tab;
-
     /** @var string Path to tab view file */
     protected $view = 'tab/index';
 
-    /** @var string Path to tab view file */
-    protected $topView = 'tab/top';
-
     /** @var string Path to content view file */
     protected $contentView = 'tab/content';
-
-    /** @var string HTML rendered tab top string */
-    protected $outputTop;
-
-    /** @var string HTML rendered tab Content string */
-    protected $outputContent;
 
     /**
      * @param Form $form Pointer to parent form container
      * @param TabView $tab Pointer to parent tab container
      * @param \samson\core\IViewable $renderer Renderer object
      */
-    public function __construct(Form & $form, TabView & $tab = null, IViewable & $renderer = null)
+    public function __construct(Form & $form)
     {
-        // Save pointer to parent form
-        $this->form = & $form;
-
-        // Save pointer to parent tab
-        $this->tab = & $tab;
-
         // Fire event that tab has been created
-        Event::fire('cms_ui.tab_created', array(&$this));
+        Event::fire('cms_ui.tabview_created', array(&$this));
 
-        // Define parent container
-        $parent = isset($tab) ? $tab : $form;
-
-        // Set custom tab renderer if passed or use parent
-        $this->renderer = isset($renderer) ? $renderer : $parent->renderer;
-
-        parent::__construct($this->renderer, $parent);
+        parent::__construct($form->renderer, $form);
     }
 
     /**
-     * Render tab top part
-     */
+ * Render tab top part
+ */
     protected function renderTop()
     {
         $html = '';
@@ -135,4 +108,3 @@ class TabView extends Container
         return $this->output;
     }
 }
-

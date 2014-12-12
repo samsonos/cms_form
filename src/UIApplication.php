@@ -49,9 +49,24 @@ class UIApplication extends CompressableService
             ->set('content', '<i class="sprite sprite-header_site" href="/"></i>')
         ;
 
+        // Create i18n menu
+        $i18nMenu = new Menu($this, $menu);
+        $i18nMenu->set('title', t('Выберите язык', true))
+        ->set('class', 'i18n-list');
+
+        // Iterate all supported locales
+        foreach (\samson\core\SamsonLocale::get() as $locale) {
+            $localeItem = new MenuItem($i18nMenu);
+            $url = $locale == DEFAULT_LOCALE ? '' : '/'.$locale;
+
+            $localeItem
+                ->set('class', 'i18n_item-'.$locale.' '.($locale == \samson\core\SamsonLocale::current() ? 'active' : ''))
+                ->set('content', '<a href="'.$url.'">'.$locale.'</a>');
+        }
+
         // Create exit item
         $exitItem = new MenuItem($menu);
-        $exitItem->set('title', t('Выйти из SamsonCMS', true))
+        $exitItem->set('title', t('Выйти', true))
             ->set('content', '<i class="sprite sprite-header_logout" href="/"></i>')
         ;
 
@@ -68,19 +83,6 @@ class UIApplication extends CompressableService
     }
 
     /**
-     * Show UI form by identifier
-     * @param string $identifier Container identifier
-     */
-    public function container($identifier)
-    {
-        // Get container by identifier
-        $container = & $this->openedContainers[$identifier];
-        if (isset($container)) {
-
-        }
-    }
-
-    /**
      * Render user interface
      */
     public function __handler()
@@ -91,17 +93,5 @@ class UIApplication extends CompressableService
         // Render workspace
         $this->set('content_html', $this->workspace->render())
         ;
-    }
-
-    /** Controllers */
-    public function __container($identifier = null)
-    {
-        $form = new Form($this);
-        $form->add(new TabView($form));
-
-        // Add this form to workspace
-        $this->workspace->add($form);
-
-        $this->view('window/index')->set('content', $form);
     }
 }

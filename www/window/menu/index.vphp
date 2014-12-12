@@ -1,4 +1,4 @@
-<nav class="menu">
+<nav class="menu <?php iv('class')?>">
     <ul class="menu__list">
         <?php iv('content_html')?>
     </ul>
