@@ -1,0 +1,3 @@
+<div class="panel">
+    <?php iv('content')?>
+</div>

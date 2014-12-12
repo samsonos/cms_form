@@ -1,0 +1,5 @@
+<nav class="menu">
+    <ul class="menu__list">
+        <?php iv('items')?>
+    </ul>
+</nav>

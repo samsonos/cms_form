@@ -1,0 +1,8 @@
+<form class="form"
+    <?php if(isv('action')):    ?>action="<?php v('action')?>"      <?php endif?>
+    <?php if(isv('enctype')):   ?>action="<?php v('enctype')?>"     <?php endif?>
+>
+    <div class="form__inner">
+        <?php iv('content')?>
+    </div>
+</form>

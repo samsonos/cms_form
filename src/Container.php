@@ -14,6 +14,7 @@ use samson\core\IViewSettable;
 /**
  * Generic UI container class
  * @package samsonos\cms\ui
+ * @author Vitaly Iegorov <egorov@samsonos.com>
  */
 class Container implements IViewSettable
 {

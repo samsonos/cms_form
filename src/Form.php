@@ -13,6 +13,7 @@ use samson\core\IViewable;
 /**
  * Class Form
  * @package samsonos\cms\form
+ * @author Vitaly Iegorov <egorov@samsonos.com>
  */
 class Form extends Container
 {
