@@ -40,22 +40,19 @@ class UIApplication extends CompressableService
         // Create home item
         $homeItem = new MenuItem($menu);
         $homeItem->set('title', 'Home')
-            ->set('class', 'btnHome')
-            ->set('content', '<a href="/">Home</a>')
+            ->set('content', '<i class="sprite sprite-header_home" href="/"></i>')
         ;
 
         // Create site item
         $siteItem = new MenuItem($menu);
-        $siteItem->set('title', 'Go to web-site')
-            ->set('class', 'btnWebSite')
-            ->set('content', '<a href="/"></a>')
+        $siteItem->set('title', t('Перейти на веб-сайт', true))
+            ->set('content', '<i class="sprite sprite-header_site" href="/"></i>')
         ;
 
         // Create exit item
         $exitItem = new MenuItem($menu);
-        $siteItem->set('title', t('Выйти из SamsonCMS', true))
-            ->set('class', 'btnLogout')
-            ->set('content', '<a href="/"></a>')
+        $exitItem->set('title', t('Выйти из SamsonCMS', true))
+            ->set('content', '<i class="sprite sprite-header_logout" href="/"></i>')
         ;
 
         // Fire event that ui menu container has been created

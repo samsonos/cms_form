@@ -1,9 +1,45 @@
-.window__menu {
-  .icon {
-    display: inline-block;
-    height: 32px;
-    width: 32px;
+.stitches-sprite(@x: 0, @y: 0, @width: 0, @height: 0) {
+  background-position: @x @y;
+  width: @width;
+  height: @height;
+}
 
+.sprite {
+  background-image: url(../www/window/menu/img/icons.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
 
+  &.sprite-header_edit {
+    .stitches-sprite(-5px, -5px, 20px, 20px);
+  }
+
+  &.sprite-header_edit:hover {
+    .stitches-sprite(-35px, -5px, 20px, 20px);
+  }
+
+  &.sprite-header_home {
+    .stitches-sprite(-65px, -5px, 22px, 22px);
+  }
+
+  &.sprite-header_home:hover {
+    .stitches-sprite(-97px, -5px, 22px, 22px);
+  }
+
+  &.sprite-header_logout {
+    .stitches-sprite(-129px, -5px, 16px, 16px);
+  }
+
+  &.sprite-header_logout:hover {
+    .stitches-sprite(-155px, -5px, 16px, 16px);
+  }
+
+  &.sprite-header_site {
+    .stitches-sprite(-181px, -5px, 22px, 22px);
+  }
+
+  &.sprite-header_site:hover {
+    .stitches-sprite(-213px, -5px, 22px, 22px);
   }
 }
