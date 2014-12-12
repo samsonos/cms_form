@@ -3,6 +3,11 @@
     <?php if(isv('enctype')):   ?>action="<?php v('enctype')?>"     <?php endif?>
 >
     <div class="form__inner">
-        <?php iv('content')?>
+
+        <?php if(isv('title')):?>
+            <h1><?php iv('title')?></h1>
+        <?php endif?>
+
+        <?php iv('content_html')?>
     </div>
 </form>

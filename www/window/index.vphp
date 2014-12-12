@@ -1,6 +1,6 @@
 <section class="window">
-    <?php iv('menu')?>
+    <?php iv('menu_html')?>
     <div class="window__inner">
-        <?php iv('content')?>
+        <?php iv('content_html')?>
     </div>
 </section>

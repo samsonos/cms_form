@@ -25,7 +25,7 @@ class Container implements IViewSettable
     protected $children = array();
 
     /** @var string Path to container view file */
-    protected $view = 'index';
+    protected $view = 'window/index';
 
     /** @var IViewable Renderer object */
     protected $renderer;
@@ -50,6 +50,12 @@ class Container implements IViewSettable
 
         // Save pointer to parent form
         $this->parent = & $parent;
+
+        // Generate unique identifier
+        $this->identifier = uniqid();
+
+        // Generate generic title
+        $this->title = get_class($this).$this->identifier;
 
         // Fire event that ui container has been created
         Event::fire('cms_ui.container_created', array(&$this));
@@ -82,7 +88,9 @@ class Container implements IViewSettable
         // Render container view with child containers
         return $this->renderer
             ->view($this->view)
-            ->set('children', $html)
+            ->set('title', $this->title)
+            ->set('identifier', $this->identifier)
+            ->set('content_html', $html)
             ->output();
     }
 

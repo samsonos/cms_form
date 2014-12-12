@@ -1,0 +1,3 @@
+<div class="tab__content__inner" id="content_<?php iv('identifier')?>">
+    <?php iv('content_html')?>
+</div>

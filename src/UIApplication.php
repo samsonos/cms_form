@@ -20,8 +20,20 @@ class UIApplication extends CompressableService
     /** @var string Identifier */
     protected $id = 'ui';
 
-    /** @var Container[] Collection of loaded containers */
-    protected $containers = array();
+    /** @var Container Pointer to current top container */
+    protected $top;
+
+    /** @var Container[] Collection of opened containers */
+    protected $openedContainers = array();
+
+    /*
+     * Initialize service
+     */
+    public function init(array $params = array())
+    {
+        // Create top parent container
+        $this->top = new Container($this);
+    }
 
     /**
      * Show UI form by identifier
@@ -30,9 +42,21 @@ class UIApplication extends CompressableService
     public function container($identifier)
     {
         // Get container by identifier
-        $container = & $this->containers[$identifier];
+        $container = & $this->openedContainers[$identifier];
         if (isset($container)) {
 
         }
+    }
+
+    /** Controllers */
+    public function __container($identifier = null)
+    {
+        $form = new Form($this);
+        $form->add(new TabView($form));
+
+        $this->top->add(new Menu());
+        $this->top->add($form);
+
+        $this->view('window/index')->content($form);
     }
 }

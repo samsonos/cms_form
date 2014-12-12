@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title><?php v('title'); ?> - <?php t('SamsonCMS')?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-language" content="ru" />
+        <link rel="icon" type="image/png" href="favicon.png" >
+    </head>
+
+    <body class="workspace" id="<?php iv('identifier'); ?>">
+        <?php iv('menu_html')?>
+        <div class="workspace__inner">
+            <?php iv('content_html')?>
+        </div>
+    </body>
+</html>
+

@@ -11,23 +11,23 @@ use samson\core\Event;
 use \samson\core\IViewable;
 
 /**
- * Class Tab
+ * Class TabView
  * @package samsonos\cms\form
  * @author Vitaly Iegorov <egorov@samsonos.com>
  */
-class Tab extends Container
+class TabView extends Container
 {
     /** @var Form Pointer to parent form */
     protected $form;
 
-    /** @var Tab Pointer to parent tab */
+    /** @var TabView Pointer to parent tab */
     protected $tab;
 
     /** @var string Path to tab view file */
     protected $view = 'tab/index';
 
     /** @var string Path to tab view file */
-    protected $topView = 'tab/tab';
+    protected $topView = 'tab/top';
 
     /** @var string Path to content view file */
     protected $contentView = 'tab/content';
@@ -40,10 +40,10 @@ class Tab extends Container
 
     /**
      * @param Form $form Pointer to parent form container
-     * @param Tab $tab Pointer to parent tab container
+     * @param TabView $tab Pointer to parent tab container
      * @param \samson\core\IViewable $renderer Renderer object
      */
-    public function __construct(Form & $form, Tab & $tab = null, IViewable & $renderer = null)
+    public function __construct(Form & $form, TabView & $tab = null, IViewable & $renderer = null)
     {
         // Save pointer to parent form
         $this->form = & $form;
@@ -70,7 +70,7 @@ class Tab extends Container
     {
         $html = '';
 
-        /** @var Tab $child Iterate all child tabs */
+        /** @var TabView $child Iterate all child tabs */
         foreach ($this->children as $child) {
             // Render each child tab tab view
             $html .= $child->renderTop();
@@ -79,7 +79,8 @@ class Tab extends Container
         // Render tab tab view with child tabs
         $this->outputTop = $this->renderer
             ->view($this->topView)
-            ->set('tabs', $html)
+            ->set('identifier', $this->identifier)
+            ->set('content_html', $html)
             ->output();
 
         // Fire event that tab top has been rendering
@@ -95,7 +96,7 @@ class Tab extends Container
     {
         $html = '';
 
-        /** @var Tab $child Iterate all child tabs */
+        /** @var TabView $child Iterate all child tabs */
         foreach ($this->children as $child) {
             // Render each child tab content view
             $html .= $child->renderContent();
@@ -104,7 +105,8 @@ class Tab extends Container
         // Render tab content view with child tabs
         $this->outputContent = $this->renderer
             ->view($this->contentView)
-            ->set('tabs', $html)
+            ->set('identifier', $this->identifier)
+            ->set('content_html', $html)
             ->output();
 
         // Fire event that tab top has been rendering
@@ -116,15 +118,15 @@ class Tab extends Container
     /**
      * Render tab HTML. Method calls all child tabs
      * rendering.
-     * @return string Tab HTML
+     * @return string TabView HTML
      */
     public function render()
     {
         // Render tab consisting of two parts
         $this->output = $this->renderer
             ->view($this->view)
-            ->set('tab', $this->renderTop())
-            ->set('content', $this->renderContent())
+            ->set('top_html', $this->renderTop())
+            ->set('content_html', $this->renderContent())
             ->output();
 
         // Fire event that tab has been rendering
