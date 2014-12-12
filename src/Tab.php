@@ -31,13 +31,17 @@ class Tab extends Container
      */
     public function __construct(Container & $parent)
     {
+        parent::__construct($parent->renderer, $parent);
+
         // Create header containers
         $this->header = new Container($parent->renderer, $this);
         $this->header->set('view', 'tab/header');
+        $this->header->set('identifier', $this->identifier);
 
         // Create body containers
         $this->body = new Container($parent->renderer, $this);
         $this->body->set('view', 'tab/body');
+        $this->body->set('identifier', $this->identifier);
 
         /**
          * Add nested tab to current tab.
@@ -56,7 +60,5 @@ class Tab extends Container
 
         // Fire event that tab has been created
         Event::fire('cms_ui.tab_created', array(&$this));
-
-        parent::__construct($parent->renderer, $parent);
     }
 }

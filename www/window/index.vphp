@@ -1,4 +1,4 @@
-<section class="window">
+<section class="window <?php iv('class')?>">
     <?php iv('menu_html')?>
     <div class="window__inner">
         <?php iv('content_html')?>
