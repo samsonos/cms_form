@@ -51,6 +51,13 @@ class UIApplication extends CompressableService
             ->set('content', '<a href="/"></a>')
         ;
 
+        // Create exit item
+        $exitItem = new MenuItem($menu);
+        $siteItem->set('title', t('Выйти из SamsonCMS', true))
+            ->set('class', 'btnExit')
+            ->set('content', '<a href="/"></a>')
+        ;
+
         // Fire event that ui menu container has been created
         Event::fire('cms_ui.mainmenu_created', array(&$menu, &$this));
 

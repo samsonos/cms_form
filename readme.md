@@ -1,6 +1,6 @@
-#SamsonCMS Generic Form  
+#SamsonCMS User interface  
  
-This module gives abstraction level for working with forms in SamsonCMS environment.
+This module gives abstraction level for working with all UI components in SamsonCMS environment.
  
 [![Latest Stable Version](https://poser.pugx.org/samsonos/cms_form/v/stable.svg)](https://packagist.org/packages/samsonos/cms_form) 
 [![Build Status](https://travis-ci.org/samsonos/cms_form.png)](https://travis-ci.org/samsonos/cms_form) 
