@@ -84,7 +84,7 @@ class TabView extends Container
             ->output();
 
         // Fire event that tab top has been rendering
-        Event::fire('cms_ui.tab_render_top', array(&$this, &$this->outputTop));
+        Event::fire('cms_ui.tab_rendered_top', array(&$this, &$this->outputTop));
 
         return $this->outputTop;
     }
@@ -110,7 +110,7 @@ class TabView extends Container
             ->output();
 
         // Fire event that tab top has been rendering
-        Event::fire('cms_ui.tab_render_content', array(&$this, &$this->outputContent));
+        Event::fire('cms_ui.tab_rendered_content', array(&$this, &$this->outputContent));
 
         return $this->outputContent;
     }
@@ -130,7 +130,7 @@ class TabView extends Container
             ->output();
 
         // Fire event that tab has been rendering
-        Event::fire('cms_ui.tab_render', array(&$this, &$this->output));
+        Event::fire('cms_ui.tab_rendered', array(&$this, &$this->output));
 
         return $this->output;
     }

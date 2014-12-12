@@ -40,6 +40,9 @@ class Container implements IViewSettable
     protected $identifier;
 
     /** @var string HTML rendered container string */
+    protected $content;
+
+    /** @var string HTML rendered container string */
     protected $output;
 
     /**
@@ -101,7 +104,8 @@ class Container implements IViewSettable
      */
     public function render()
     {
-        $html = '';
+        // Start rendering content with current content
+        $html = $this->content;
 
         // Iterate all child containers
         foreach ($this->children as $child) {
@@ -110,13 +114,18 @@ class Container implements IViewSettable
         }
 
         // Render container view with child containers
-        return $this->renderer
+        $this->output = $this->renderer
             ->view($this->view)
             ->set('title', $this->title)
             ->set('class', $this->class)
             ->set('identifier', $this->identifier)
             ->set('content_html', $html)
             ->output();
+
+        // Fire event that container has been rendering
+        Event::fire('cms_ui.container_rendered', array(&$this, &$this->output));
+
+        return $this->output;
     }
 
     /**

@@ -39,7 +39,17 @@ class UIApplication extends CompressableService
 
         // Create home item
         $homeItem = new MenuItem($menu);
-        $homeItem->set('title', 'Home')->set('class', 'btnHome');
+        $homeItem->set('title', 'Home')
+            ->set('class', 'btnHome')
+            ->set('content', '<a href="/">Home</a>')
+        ;
+
+        // Create site item
+        $siteItem = new MenuItem($menu);
+        $siteItem->set('title', 'Go to web-site')
+            ->set('class', 'btnSite')
+            ->set('content', '<a href="/"></a>')
+        ;
 
         // Fire event that ui menu container has been created
         Event::fire('cms_ui.mainmenu_created', array(&$menu, &$this));
