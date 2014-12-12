@@ -1,9 +1,0 @@
-<div class="tab">
-    <div class="tab__top">
-        <?php iv('top_html')?>
-    </div>
-
-    <div class="tab__content">
-        <?php iv('content_html')?>
-    </div>
-</div>

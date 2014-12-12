@@ -21,44 +21,42 @@ class Tab extends Container
     protected $view = 'tab/tab';
 
     /** @var Container Top container */
-    protected $topContainer;
+    public $header;
 
     /** @var Container Content container */
-    protected $contentContainer;
+    public $body;
 
     /**
-     * @param TabView $tabView Pointer to parent tab view container
-     * @param \samson\core\IViewable $renderer Renderer object
+     * @param Container $parent Pointer to parent container
      */
-    public function __construct(TabView & $tabView)
+    public function __construct(Container & $parent)
     {
+        // Create header containers
+        $this->header = new Container($parent->renderer, $this);
+        $this->header->set('view', 'tab/header');
+
+        // Create body containers
+        $this->body = new Container($parent->renderer, $this);
+        $this->body->set('view', 'tab/body');
+
+        /**
+         * Add nested tab to current tab.
+         * This overloaded add method also connects current tab header & body
+         * with added tab header & body which gives generic recursion and separate
+         * rendering of inner tab headers and body inside current tab header and body
+         * and so on.
+         */
+        if (is_a($parent, 'samsonos\cms\ui\Tab')) {
+            // Add nested tab header container to current header
+            $parent->header->add($this->header);
+
+            // Add nested tab body container to current body
+            $parent->body->add($this->body);
+        }
+
         // Fire event that tab has been created
         Event::fire('cms_ui.tab_created', array(&$this));
 
-        // Create top & conetnet containers
-        $this->topContainer = new Container($tabView->renderer, $this);
-        $this->contentContainer = new Container($tabView->renderer, $this);
-
-        parent::__construct($tabView->renderer, $tabView);
-    }
-
-    /**
-     * Render tab HTML. Method calls all child tabs
-     * rendering.
-     * @return string TabView HTML
-     */
-    public function render()
-    {
-        // Render tab consisting of two parts
-        $this->output = $this->renderer
-            ->view($this->view)
-            ->set('top_html', $this->topContainer->render())
-            ->set('content_html', $this->contentContainer->render())
-            ->output();
-
-        // Fire event that tab has been rendering
-        Event::fire('cms_ui.tab_rendered', array(&$this, &$this->output));
-
-        return $this->output;
+        parent::__construct($parent->renderer, $parent);
     }
 }

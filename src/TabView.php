@@ -37,69 +37,26 @@ class TabView extends Container
     }
 
     /**
- * Render tab top part
- */
-    protected function renderTop()
-    {
-        $html = '';
-
-        /** @var TabView $child Iterate all child tabs */
-        foreach ($this->children as $child) {
-            // Render each child tab tab view
-            $html .= $child->renderTop();
-        }
-
-        // Render tab tab view with child tabs
-        $this->outputTop = $this->renderer
-            ->view($this->topView)
-            ->set('identifier', $this->identifier)
-            ->set('content_html', $html)
-            ->output();
-
-        // Fire event that tab top has been rendering
-        Event::fire('cms_ui.tab_rendered_top', array(&$this, &$this->outputTop));
-
-        return $this->outputTop;
-    }
-
-    /**
-     * Render tab content part
-     */
-    protected function renderContent()
-    {
-        $html = '';
-
-        /** @var TabView $child Iterate all child tabs */
-        foreach ($this->children as $child) {
-            // Render each child tab content view
-            $html .= $child->renderContent();
-        }
-
-        // Render tab content view with child tabs
-        $this->outputContent = $this->renderer
-            ->view($this->contentView)
-            ->set('identifier', $this->identifier)
-            ->set('content_html', $html)
-            ->output();
-
-        // Fire event that tab top has been rendering
-        Event::fire('cms_ui.tab_rendered_content', array(&$this, &$this->outputContent));
-
-        return $this->outputContent;
-    }
-
-    /**
      * Render tab HTML. Method calls all child tabs
      * rendering.
      * @return string TabView HTML
      */
     public function render()
     {
+        $bodyHtml = '';
+        $headerHtml = '';
+
+        /** @var Tab $child Render separately child tabs body & headers */
+        foreach ($this->children as $child) {
+            $headerHtml .= $child->header->render();
+            $bodyHtml .= $child->body->render();
+        }
+
         // Render tab consisting of two parts
         $this->output = $this->renderer
             ->view($this->view)
-            ->set('top_html', $this->renderTop())
-            ->set('content_html', $this->renderContent())
+            ->set('header_html', $headerHtml)
+            ->set('body_html', $bodyHtml)
             ->output();
 
         // Fire event that tab has been rendering

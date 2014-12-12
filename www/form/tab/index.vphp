@@ -1,5 +1,15 @@
 <div class="tabview">
-    <div class="tabview__inner">
-        <?php iv('content_html')?>
+    <!-- All tabs header parts -->
+    <div class="tabview__header">
+        <div class="tab__header__inner">
+            <?php iv('header_html')?>
+        </div>
+    </div>
+
+    <!-- All tabs body parts -->
+    <div class="tabview__body">
+        <div class="tab__body__inner">
+            <?php iv('body_html')?>
+        </div>
     </div>
 </div>

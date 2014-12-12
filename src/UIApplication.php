@@ -35,7 +35,7 @@ class UIApplication extends CompressableService
         $this->workspace = new Container($this);
 
         // Create main UI menu
-        $menu = new Menu($this);
+        $menu = new Menu($this, $this->workspace);
 
         // Create home item
         $homeItem = new MenuItem($menu);
@@ -73,8 +73,17 @@ class UIApplication extends CompressableService
         // Fire event that ui menu container has been created
         Event::fire('cms_ui.mainmenu_created', array(&$menu, &$this));
 
-        // Add main menu
-        $this->workspace->add($menu);
+        // Create main-content panel
+        $mainPanel = new Container($this, $this->workspace);
+        $mainPanel->set('class', 'mainPanel');
+
+        // Create form with tabs
+        $form = new Form($this, $this->workspace);
+        $tabs = new TabView($form);
+        $tab = new Tab($tabs);
+        $tab->header->set('content', '<span>Закладка</span>');
+        $innerTab = new Tab($tab);
+        $innerTab->header->set('content', '<span>Внутренняя закладка</span>');
 
         // Fire event that ui workspace container has been created
         Event::fire('cms_ui.workspace_created', array(&$this->workspace, &$this));

@@ -1,3 +1,0 @@
-<ul class="tab__top__inner" id="top_<?php iv('identifier')?>">
-    <?php iv('content_html')?>
-</ul>
