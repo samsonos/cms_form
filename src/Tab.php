@@ -39,8 +39,9 @@ class Tab extends Container
     /**
      * @param Form $form Pointer to parent form container
      * @param Tab $tab Pointer to parent tab container
+     * @param mixed $renderer Renderer object
      */
-    public function __construct(Form & $form, Tab & $tab = null)
+    public function __construct(Form & $form, Tab & $tab = null, & $renderer = null)
     {
         // Save pointer to parent form
         $this->form = & $form;
@@ -54,7 +55,10 @@ class Tab extends Container
         // Define parent container
         $parent = isset($tab) ? $tab : $form;
 
-        parent::__construct($parent);
+        // Set custom tab renderer if passed or use parent
+        $this->renderer = isset($renderer) ? $renderer : $parent->renderer;
+
+        parent::__construct($this->renderer, $parent);
     }
 
     /**

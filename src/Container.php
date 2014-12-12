@@ -27,6 +27,12 @@ class Container
     /** @var mixed Renderer object */
     protected $renderer;
 
+    /** @var string Container title */
+    protected $title;
+
+    /** @var string Container unique identifier */
+    protected $identifier;
+
     /** @var string HTML rendered container string */
     protected $output;
 
@@ -34,10 +40,10 @@ class Container
      * @param Container $parent Add parent container
      * @param mixed $renderer Object for rendering container
      */
-    public function __construct(Container & $parent = null, & $renderer = null)
+    public function __construct(& $renderer, Container & $parent = null)
     {
         // Define renderer
-        $renderer = !isset($renderer) ? m() : $renderer;
+        $this->renderer = !isset($renderer) ? m() : $renderer;
 
         // Save pointer to parent form
         $this->parent = & $parent;

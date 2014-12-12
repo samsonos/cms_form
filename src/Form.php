@@ -16,13 +16,14 @@ use samson\core\Event;
 class Form extends Container
 {
     /**
-     * @param Form $parent Pointer to parent form container
+     * @param mixed $renderer Renderer object
+     * @param Container $parent Pointer to parent form container
      */
-    public function __construct(Form & $parent = null)
+    public function __construct(& $renderer, Container & $parent = null)
     {
         // Fire event that form has been created
         Event::fire('cms_ui.form_created', array(&$this));
 
-        parent::__construct($parent);
+        parent::__construct($renderer, $parent);
     }
 }
