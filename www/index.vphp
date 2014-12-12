@@ -9,10 +9,6 @@
     </head>
 
     <body class="workspace" id="<?php iv('identifier'); ?>">
-        <?php iv('menu_html')?>
-        <div class="workspace__inner">
-            <?php iv('content_html')?>
-        </div>
+        <?php iv('content_html')?>
     </body>
 </html>
-

@@ -9,12 +9,15 @@
 namespace samsonos\cms\ui;
 
 /**
- * UI menu
+ * UI menu item
  * @package samsonos\cms\ui
  * @author Vitaly Iegorov <egorov@samsonos.com>
  */
-class Menu extends Container
+class MenuItem extends Container
 {
-    /** @var string Path to menu view file */
-    protected $view = 'window/menu/index';
+    /** @var string Path to menu item view file */
+    protected $view = 'window/menu/item';
+
+    /** @var int Menu action */
+    protected $action;
 }

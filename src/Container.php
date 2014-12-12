@@ -62,6 +62,19 @@ class Container implements IViewSettable
     }
 
     /**
+     * Set container field value
+     * @param string    $field  Field identifier
+     * @param mixed     $value  Field value
+     */
+    public function set($field, $value)
+    {
+        // Check field existence in object
+        if (property_exists($this, $field)) {
+            $this->$field = $value;
+        }
+    }
+
+    /**
      * Add child container to current container
      * @param Container $child Pointer to added child container
      */
