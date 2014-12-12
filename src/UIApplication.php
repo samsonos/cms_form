@@ -79,15 +79,17 @@ class UIApplication extends CompressableService
 
         // Create form with tabs
         $form = new Form($this, $mainPanel);
+
+        // Create form tab view
         $tabs = new TabView($form);
+
+        // Add tab
         $tab = new Tab($tabs);
         $tab->header->set('content', '<span>Описание</span>');
 
-        // Iterate all supported locales
+        // Create localized tabs
         foreach (\samson\core\SamsonLocale::get() as $locale) {
-            $localeItem = new Tab($tab);
-
-            $localeItem->set('content', '<span>'.$locale.'</span>');
+            (new Tab($tab))->header->set('content', '<span>'.$locale.'</span>');
         }
 
         // Fire event that ui workspace container has been created
