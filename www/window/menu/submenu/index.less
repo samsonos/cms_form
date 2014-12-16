@@ -11,4 +11,24 @@
   background: -o-linear-gradient(top,#F1F1F1,#D1D1D1);
   border-bottom: 1px solid #999999;
   min-height: 6px;
+  padding-left:8px;
+
+  .menu__item {
+    border: 1px solid transparent;
+    padding:0px 8px;
+    height: 28px;
+    margin: 2px 0px;
+
+    &:hover, &.active {
+      border: 1px solid #b6b6b6;
+      background-color: #e7e7e7;
+      border-radius: 5px;
+    }
+
+    a {
+      color:black;
+      position: relative;
+      top: -2px;
+    }
+  }
 }

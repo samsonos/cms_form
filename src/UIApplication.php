@@ -104,9 +104,19 @@ class UIApplication extends CompressableService
         $subMenu = new Menu($this, $menu);
         $subMenu->set('class', 'sub-menu');
 
+        // Fire event that ui sub-menu container has been created
+        Event::fire('cms_ui.submenu_created', array(&$subMenu, &$this));
+
+        // Create site item
+        $siteItem = new MenuItem($subMenu);
+        $siteItem->set('title', t('Перейти к материалам веб-сайта', true))
+            ->set('class', 'btn')
+            ->set('content', '<a href="/material">'.t('Материалы', true).'</a>')
+        ;
+
         // Create main-content panel
         $mainPanel = new Container($this, $this->workspace);
-        $mainPanel->set('class', 'mainPanel');
+        $mainPanel->set('class', 'mainPanel '.(sizeof($subMenu->children()) ? 'with-sub-menu' : ''));
 
         /*// Create form with tabs
         $form = new Form($this, $mainPanel);

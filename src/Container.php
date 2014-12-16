@@ -98,6 +98,15 @@ class Container implements IViewSettable
     }
 
     /**
+     * Get container children collection
+     * @return Container[] Collection of containers children
+     */
+    public function children()
+    {
+        return $this->children;
+    }
+
+    /**
      * Render container HTML. Method calls all child elements
      * rendering.
      * @return string Container HTML
