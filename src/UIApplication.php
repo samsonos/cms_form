@@ -36,39 +36,44 @@ class UIApplication extends CompressableService
 
         // Create main UI menu
         $menu = new Menu($this, $this->workspace);
+        $menu->set('class', 'main-menu');
 
         // Create home item
         $homeItem = new MenuItem($menu);
         $homeItem->set('title', 'Home')
-            ->set('content', '<i class="sprite sprite-header_home" href="/"></i>')
+            ->set('class', 'btn-home')
+            ->set('content', '<a href="/"><i class="sprite sprite-header_home" href="/"></i></a>')
         ;
 
         // Create site item
         $siteItem = new MenuItem($menu);
         $siteItem->set('title', t('Перейти на веб-сайт', true))
-            ->set('content', '<i class="sprite sprite-header_site" href="/"></i>')
+            ->set('class', 'btn-site')
+            ->set('content', '<a href="/"><i class="sprite sprite-header_site" href="/"></i></a>')
+        ;
+
+        // Create exit item
+        $exitItem = new MenuItem($menu);
+        $exitItem->set('title', t('Выйти', true))
+            ->set('class', 'btn-logout')
+            ->set('content', '<a href="signin/logout"><i class="sprite sprite-header_logout" href="/"></i></a>')
         ;
 
         // Create i18n menu
         $i18nMenu = new Menu($this, $menu);
         $i18nMenu->set('title', t('Выберите язык', true))
-        ->set('class', 'i18n-list');
-
+            ->set('class', 'i18n-list');
         // Iterate all supported locales
         foreach (\samson\core\SamsonLocale::get() as $locale) {
             $localeItem = new MenuItem($i18nMenu);
             $url = $locale == DEFAULT_LOCALE ? '' : '/'.$locale;
 
             $localeItem
-                ->set('class', 'i18n_item-'.$locale.' '.($locale == \samson\core\SamsonLocale::current() ? 'active' : ''))
+                ->set('class', 'i18n_item-'.$locale.' '.($locale == \samson\core\SamsonLocale::current() ? 'i18n-active' : ''))
                 ->set('content', '<a href="'.$url.'">'.$locale.'</a>');
         }
 
-        // Create exit item
-        $exitItem = new MenuItem($menu);
-        $exitItem->set('title', t('Выйти', true))
-            ->set('content', '<i class="sprite sprite-header_logout" href="/"></i>')
-        ;
+
 
         // Fire event that ui menu container has been created
         Event::fire('cms_ui.mainmenu_created', array(&$menu, &$this));
@@ -77,7 +82,7 @@ class UIApplication extends CompressableService
         $mainPanel = new Container($this, $this->workspace);
         $mainPanel->set('class', 'mainPanel');
 
-        // Create form with tabs
+        /*// Create form with tabs
         $form = new Form($this, $mainPanel);
 
         // Create form tab view
@@ -90,7 +95,7 @@ class UIApplication extends CompressableService
         // Create localized tabs
         foreach (\samson\core\SamsonLocale::get() as $locale) {
             (new Tab($tab))->header->set('content', '<span>'.$locale.'</span>');
-        }
+        }*/
 
         // Fire event that ui workspace container has been created
         Event::fire('cms_ui.workspace_created', array(&$this->workspace, &$this));

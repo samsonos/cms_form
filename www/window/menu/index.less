@@ -1,14 +1,32 @@
-.menu {
+.main-menu {
   position:absolute;
   top:0px;
   right: 0px;
   left:0px;
-  min-heigh:32px;
+  min-height:32px;
   background: url('../www/window/menu/img/bg.png') repeat-x;
+  padding-left:16px;
 
   .menu__item {
     display: inline-block;
     height: 32px;
+    min-width: 32px;
     vertical-align: middle;
+
+    &.btn-logout {
+      float:right;
+      border-left: 1px solid white;
+      padding: 0px 8px;
+    }
+
+    a {
+      line-height:30px;
+    }
+  }
+
+  .i18n-list {
+    float:right;
+    margin-right:8px;
+    text-transform: uppercase;
   }
 }
