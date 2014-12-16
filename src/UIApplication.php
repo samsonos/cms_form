@@ -72,8 +72,15 @@ class UIApplication extends CompressableService
         // Create exit item
         $exitItem = new MenuItem($menu);
         $exitItem->set('title', t('Выйти', true))
-            ->set('class', 'btn-logout')
+            ->set('class', 'btn-icon-right btn-logout')
             ->set('content', '<a href="signin/logout"><i class="sprite sprite-header_logout" href="/"></i></a>')
+        ;
+
+        // Create settings item
+        $settingsItem = new MenuItem($menu);
+        $settingsItem->set('title', t('Выйти', true))
+            ->set('class', 'btn-icon-right btn-settings')
+            ->set('content', '<a href="settings"><i class="sprite sprite-header_settings" href="/"></i></a>')
         ;
 
         // Create i18n menu
