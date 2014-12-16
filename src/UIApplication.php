@@ -97,10 +97,12 @@ class UIApplication extends CompressableService
                 ->set('content', '<a href="'.$url.'">'.$locale.'</a>');
         }
 
-
-
         // Fire event that ui menu container has been created
         Event::fire('cms_ui.mainmenu_created', array(&$menu, &$this));
+
+        // Create main UI menu
+        $subMenu = new Menu($this, $menu);
+        $subMenu->set('class', 'sub-menu');
 
         // Create main-content panel
         $mainPanel = new Container($this, $this->workspace);
