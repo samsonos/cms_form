@@ -52,20 +52,6 @@ class UIApplication extends CompressableService
             ->set('content', '<a href="/"><i class="sprite sprite-header_site" href="/"></i></a>')
         ;
 
-        // Create site item
-        $siteItem = new MenuItem($menu);
-        $siteItem->set('title', t('Перейти к материалам веб-сайта', true))
-            ->set('class', 'btn-application active')
-            ->set('content', '<a href="/material">'.t('Материалы', true).'</a>')
-        ;
-
-        // Create site item
-        $siteItem = new MenuItem($menu);
-        $siteItem->set('title', t('Перейти к материалам веб-сайта', true))
-            ->set('class', 'btn-application')
-            ->set('content', '<a href="/material">'.t('Материалы', true).'</a>')
-        ;
-
         // Fire event that ui menu left container has been created
         Event::fire('cms_ui.mainmenu_leftcreated', array(&$menu, &$this));
 
@@ -106,13 +92,6 @@ class UIApplication extends CompressableService
 
         // Fire event that ui sub-menu container has been created
         Event::fire('cms_ui.submenu_created', array(&$subMenu, &$this));
-
-        // Create site item
-        $siteItem = new MenuItem($subMenu);
-        $siteItem->set('title', t('Перейти к материалам веб-сайта', true))
-            ->set('class', 'btn')
-            ->set('content', '<a href="/material">'.t('Материалы', true).'</a>')
-        ;
 
         // Create main-content panel
         $mainPanel = new Container($this, $this->workspace);
